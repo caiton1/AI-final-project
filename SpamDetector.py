@@ -61,13 +61,9 @@ def test(test_data, prior_spam, prior_non_spam, words_spam_prob, words_non_spam_
     correct = 0
     false_positive = 0
     true_positive = 0
-    auc = 0
-    sum_auc = 0
 
     predictions = []
     spam_labels = []
-    fpr_values = []  # false positive rate list for AUC
-    tpr_values = []  # true positive rate list for AUC
 
     total = len(test_data)
 
@@ -90,9 +86,6 @@ def test(test_data, prior_spam, prior_non_spam, words_spam_prob, words_non_spam_
             # find if positive for spam when not spam
             if prediction:
                 false_positive += 1
-
-    # calculate true positive and false positive rate for each instance
-    fpr, tpr, thresholds = roc_curve(spam_labels, predictions)
 
     # AUC calculation
     auc = roc_auc_score(spam_labels, predictions)
